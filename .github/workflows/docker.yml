@@ -1,0 +1,53 @@
+name: Docker
+
+on:
+  pull_request:
+    branches: main
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        uses: actions/checkout@v2
+      -
+        id: prepare
+        run: |
+          REPONAME=$(basename $GITHUB_REPOSITORY)
+          DOCKER_IMAGE=p0rnb0x/${REPONAME#docker_}
+
+          VERSION=${GITHUB_REF#refs/tags/v}
+          TAGS="--tag ${DOCKER_IMAGE}:${VERSION} --tag ${DOCKER_IMAGE}:latest"
+
+          PLATFORMS="--platform linux/amd64,linux/386,linux/arm64,linux/arm/v7,linux/arm/v6,linux/ppc64le,linux/s390x"
+
+          echo ::set-output name=docker_image::${DOCKER_IMAGE}
+          echo ::set-output name=buildx_args::${PLATFORMS} ${TAGS} .
+      -
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v3
+        with:
+          buildx-version: latest
+          qemu-version: latest
+      -
+        run: |
+          docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
+      -
+        if: success() && github.event_name != 'pull_request'
+        run: |
+          echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | \
+          docker login --username "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+      -
+        if: success() && github.event_name != 'pull_request'
+        run: |
+          docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args }}
+      -
+        uses: peter-evans/dockerhub-description@v2
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
+          DOCKERHUB_REPOSITORY: ${{ steps.prepare.outputs.docker_image }}
+
