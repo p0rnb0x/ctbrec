@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 UID="${UID:-9999}"
-addgroup --gid "${UID}" --system ctbrec
-adduser --disabled-password --gecos "" --home /home/ctbrec --ingroup ctbrec --uid "${UID}" ctbrec
+addgroup --gid "${UID}" --system ctbrec || true
+adduser --disabled-password --gecos "" --home /home/ctbrec --ingroup ctbrec --uid "${UID}" ctbrec || true
 
 export HOME=/home/ctbrec
 
