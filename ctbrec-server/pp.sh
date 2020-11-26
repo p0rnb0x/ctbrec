@@ -45,7 +45,7 @@ MP4="$(echo "$1/$4_$3_$TIME.mp4")"
 # Remux ts to mp4
 # This could overtax low power processors, (eg. ARM SoC in NAS), in which case you'll
 # have to post-process on a PC or at a time when no recording is happening.
-ffmpeg -i "$INPUT_FILE" -c:v copy -c:a copy -movflags faststart -f mp4 "$MP4"
+ffmpeg -threads 1 -i "$INPUT_FILE" -c:v copy -c:a copy -movflags faststart -f mp4 "$MP4"
 
 # Move mp4 to target directory - needless to say, set your own output path
 mv "$MP4" "${ROOT_DIR}/DONE/${MODEL_NAME}/"

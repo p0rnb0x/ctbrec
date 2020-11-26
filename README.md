@@ -4,7 +4,7 @@ Runs `ctbrec` as an unprivileged user within a `docker` container.
 
 ### Usage
 
-```
+```bash
 # The files in these volumes will be accessible (r+w)
 # by the current user and the ctbrec user within docker
 
@@ -22,7 +22,6 @@ docker run -e UID=`id -u` \
 
 You can also set the timezone using `-e TZ="Europe/Kiev"`.
 
-I do not recommend using the developer-supplied certificate for HTTPS,
+I do not recommend using the pre-supplied certificate for HTTPS,
 you may use a `caddy` proxy with your own certificate instead.
-
 
