@@ -2,7 +2,9 @@ name: Docker
 
 on:
   pull_request:
-    branches: main
+    branches:
+      - main
+      - cache
   push:
     tags:
       - v*
@@ -20,7 +22,7 @@ jobs:
           DOCKER_IMAGE=p0rnb0x/${REPONAME#docker_}
 
           VERSION=${GITHUB_REF#refs/tags/v}
-          TAGS="--tag ${DOCKER_IMAGE}:${VERSION} --tag ${DOCKER_IMAGE}:latest"
+          TAGS="--tag ${DOCKER_IMAGE}:${VERSION}"
 
           PLATFORMS="--platform linux/amd64,linux/386,linux/arm64,linux/arm/v7,linux/arm/v6,linux/ppc64le,linux/s390x"
 

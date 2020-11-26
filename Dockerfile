@@ -8,7 +8,7 @@ RUN apk add --no-cache \
 COPY ctbrec-server /home/ctbrec/server
 COPY entrypoint.sh /entrypoint.sh
 
-VOLUME [ "/home/ctbrec/recordings", "/home/ctbrec/.config" ]
+VOLUME [ "/home/ctbrec/recordings", "/home/ctbrec/.config", "/cache" ]
 
 EXPOSE 1080 1443
 

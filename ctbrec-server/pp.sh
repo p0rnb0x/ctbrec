@@ -40,7 +40,7 @@ TIME="$(date --date="@$5" +%d.%m.%Y_%H:%M)"
 # TIME=$(date --date="@$5" +%Y%m%d-%H%M%S)
 
 # Define filename of end result
-MP4="$(echo "$1/$4_$3_$TIME.mp4")"
+MP4="/cache/$(echo "$4_$3_$TIME.mp4")"
 
 # Remux ts to mp4
 # This could overtax low power processors, (eg. ARM SoC in NAS), in which case you'll
