@@ -10,8 +10,8 @@ if ! [ -f "${HOME}/server/ffmpeg/ffmpeg" ]; then
 fi
 
 cd "${HOME}/server"
-java -Xmx2048m \
-     -cp "ctbrec-server-3.10.6-final.jar" \
+java -Xmx256m \
+     -cp "ctbrec-server-3.10.9-final.jar" \
      -Dctbrec.config=server.json \
      ctbrec.recorder.server.HttpServer
 
