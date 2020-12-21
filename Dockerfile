@@ -1,7 +1,8 @@
-FROM openjdk:8-jre-alpine
+FROM alpine:3.12
 
 RUN apk add --no-cache \
         ffmpeg \
+        openjdk8-jre-base \
         su-exec \
         tzdata
 
