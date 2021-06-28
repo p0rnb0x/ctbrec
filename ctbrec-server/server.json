@@ -1,4 +1,6 @@
 {
+  "amateurTvPassword": "",
+  "amateurTvUsername": "",
   "bongaPassword": "",
   "bongaUsername": "",
   "bongacamsBaseUrl": "https://bongacams.com",
@@ -14,6 +16,7 @@
   "colorBase": "#FFFFFF",
   "concurrentRecordings": 0,
   "confirmationForDangerousActions": false,
+  "contactsheetTimestampLook": "font=sans-serif:fontcolor=white:fontsize=60:box=1:boxcolor=black@0.5:boxborderw=5",
   "determineResolution": false,
   "disabledSites": [],
   "downloadFilename": "${modelSanitizedName}-${localDateTime}",
@@ -32,6 +35,7 @@
   "httpTimeout": 10000,
   "httpUserAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0",
   "httpUserAgentMobile": "Mozilla/5.0 (Android 9.0; Mobile; rv:82.0) Gecko/82.0 Firefox/82.0",
+  "ignoredModels": [],
   "lastDownloadDir": "",
   "livePreviews": false,
   "livejasminBaseUrl": "https://www.livejasmin.com",
@@ -40,6 +44,7 @@
   "livejasminUsername": "",
   "localRecording": true,
   "logFFmpegOutput": false,
+  "logMissedSegments": false,
   "loghlsdlOutput": false,
   "maximumResolution": 1080,
   "maximumResolutionPlayer": 0,
@@ -54,9 +59,11 @@
   "mfcModelsTableSortType": "",
   "mfcPassword": "",
   "mfcUsername": "",
+  "minimizeToTray": false,
   "minimumLengthInSeconds": 0,
   "minimumResolution": 480,
   "minimumSpaceLeftInBytes": 0,
+  "modelGroups": [],
   "modelNotes": {},
   "models": [],
   "modelsIgnored": [],
@@ -65,14 +72,27 @@
   "onlineCheckSkipsPausedModels": false,
   "overviewUpdateIntervalInSecs": 10,
   "password": "",
+  "playlistRequestTimeout": 2000,
   "postProcessing": "",
   "postProcessingThreads": 1,
   "postProcessors": [
     {
-      "type": "ctbrec.recorder.postprocessing.Script",
+      "type": "ctbrec.recorder.postprocessing.DeleteTooShort",
       "config": {
-        "script.params": "/home/ctbrec/server/pp.sh ${absoluteParentPath} ${absolutePath} ${modelName} ${siteName} ${epochSecond}",
-        "script.executable": "/bin/sh"
+        "minimumLengthInSeconds": "60"
+      }
+    },
+    {
+      "type": "ctbrec.recorder.postprocessing.Remux",
+      "config": {
+        "ffmpeg.args": "-c:v copy -c:a copy -movflags faststart -y -f mp4",
+        "file.ext": "mp4"
+      }
+    },
+    {
+      "type": "ctbrec.recorder.postprocessing.Move",
+      "config": {
+        "path.template": "${recordingsDir}/${siteSanitizedName}/${modelSanitizedName}/${localDateTime}"
       }
     }
   ],
@@ -81,6 +101,8 @@
   "recordLater": [],
   "recordLaterColumnIds": [],
   "recordLaterColumnWidths": [],
+  "recordLaterSortColumn": "",
+  "recordLaterSortType": "",
   "recordSingleFile": false,
   "recordedModelsColumnIds": [],
   "recordedModelsColumnWidths": [],
@@ -100,9 +122,9 @@
   "showupUsername": "",
   "singlePlayer": true,
   "splitRecordings": 0,
-  "splitRecordingsAfterSecs": 1800,
+  "splitRecordingsAfterSecs": 0,
   "splitRecordingsBiggerThanBytes": 0,
-  "splitStrategy": "TIME",
+  "splitStrategy": "DONT",
   "startTab": "Settings",
   "streamatePassword": "",
   "streamateUsername": "",
@@ -122,5 +144,7 @@
   "windowMaximized": false,
   "windowWidth": 2147,
   "windowX": 4,
-  "windowY": 1340
+  "windowY": 1340,
+  "xlovecamPassword": "",
+  "xlovecamUsername": ""
 }
