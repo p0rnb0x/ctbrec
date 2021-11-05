@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.14
 
 RUN apk add --no-cache \
         ffmpeg \
@@ -17,3 +17,4 @@ ENTRYPOINT [ "/entrypoint.sh" ]
 
 HEALTHCHECK --interval=10s --retries=3 --timeout=3s \
         CMD [ "wget", "-qSO", "/dev/null", "http://localhost:1080/static/index.html" ]
+

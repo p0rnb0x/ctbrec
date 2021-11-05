@@ -9,6 +9,7 @@
   "camsodaPassword": "",
   "camsodaUsername": "",
   "chaturbateBaseUrl": "https://chaturbate.com",
+  "chaturbateMsBetweenRequests": 1000,
   "chaturbatePassword": "",
   "chaturbateUsername": "",
   "chooseStreamQuality": false,
@@ -17,17 +18,18 @@
   "concurrentRecordings": 0,
   "confirmationForDangerousActions": false,
   "contactsheetTimestampLook": "font=sans-serif:fontcolor=white:fontsize=60:box=1:boxcolor=black@0.5:boxborderw=5",
+  "defaultPriority": 50,
   "determineResolution": false,
   "disabledSites": [],
   "downloadFilename": "${modelSanitizedName}-${localDateTime}",
   "eventHandlers": [],
-  "fastPlaylistGenerator": false,
   "fastScrollSpeed": true,
   "fc2livePassword": "",
   "fc2liveUsername": "",
   "ffmpegFileSuffix": "ts",
   "ffmpegMergedDownloadArgs": "-c:v copy -c:a copy -movflags faststart -y -f mpegts",
-  "generatePlaylist": true,
+  "fontFamily": "Sans-Serif",
+  "fontSize": 14,
   "hlsdlExecutable": "hlsdl",
   "httpPort": 1080,
   "httpSecurePort": 1443,
@@ -52,8 +54,6 @@
   "mediaPlayerParams": "",
   "mfcBaseUrl": "https://www.myfreecams.com",
   "mfcDisabledModelsTableColumns": [],
-  "mfcModelsTableColumnIds": [],
-  "mfcModelsTableColumnWidths": [],
   "mfcModelsTableFilter": "",
   "mfcModelsTableSortColumn": "",
   "mfcModelsTableSortType": "",
@@ -62,9 +62,10 @@
   "minimizeToTray": false,
   "minimumLengthInSeconds": 0,
   "minimumResolution": 480,
-  "minimumSpaceLeftInBytes": 0,
+  "minimumSpaceLeftInBytes": 34359738368,
   "modelGroups": [],
   "modelNotes": {},
+  "modelPortraits": {},
   "models": [],
   "modelsIgnored": [],
   "monitorClipboard": false,
@@ -79,7 +80,7 @@
     {
       "type": "ctbrec.recorder.postprocessing.DeleteTooShort",
       "config": {
-        "minimumLengthInSeconds": "60"
+        "minimumLengthInSeconds": "120"
       }
     },
     {
@@ -92,39 +93,51 @@
     {
       "type": "ctbrec.recorder.postprocessing.Move",
       "config": {
-        "path.template": "${recordingsDir}/${siteSanitizedName}/${modelSanitizedName}/${localDateTime}"
+        "path.template": "${recordingsDir}/${siteSanitizedName}/${modelSanitizedName}"
       }
+    },
+    {
+      "type": "ctbrec.recorder.postprocessing.Rename",
+      "config": {
+        "filename.template": "${modelSanitizedName}-${localDateTime}.${fileSuffix}"
+      }
+    },
+    {
+      "type": "ctbrec.recorder.postprocessing.CreateContactSheet",
+      "config": {
+        "padding": "4",
+        "burn_in_timestamp": "false",
+        "filename": "${recordingsDir}/${siteSanitizedName}/${modelSanitizedName}/${modelSanitizedName}-${localDateTime}_contactsheet.jpg",
+        "columns": "6",
+        "background": "0x333333",
+        "total_size": "1920",
+        "rows": "8"
+      }
+    },
+    {
+      "type": "ctbrec.recorder.postprocessing.RemoveKeepFile",
+      "config": {}
     }
   ],
   "proxyType": "DIRECT",
-  "recentlyWatched": true,
-  "recordLater": [],
-  "recordLaterColumnIds": [],
-  "recordLaterColumnWidths": [],
-  "recordLaterSortColumn": "",
-  "recordLaterSortType": "",
+  "recordLaterTableSortType": "ASCENDING",
   "recordSingleFile": false,
-  "recordedModelsColumnIds": [],
-  "recordedModelsColumnWidths": [],
-  "recordedModelsSortColumn": "",
-  "recordedModelsSortType": "",
-  "recordingsColumnIds": [],
-  "recordingsColumnWidths": [],
+  "recordedModelsTableSortType": "ASCENDING",
   "recordingsDir": "/home/ctbrec/recordings",
-  "recordingsDirStructure": "ONE_PER_MODEL",
-  "recordingsSortColumn": "",
-  "recordingsSortType": "",
-  "removeRecordingAfterPostProcessing": true,
+  "recordingsDirStructure": "FLAT",
+  "recordingsTableSortType": "ASCENDING",
+  "removeRecordingAfterPostProcessing": false,
   "requireAuthentication": false,
   "servletContext": "",
+  "showGridLinesInTables": true,
   "showPlayerStarting": false,
   "showupPassword": "",
   "showupUsername": "",
   "singlePlayer": true,
   "splitRecordings": 0,
-  "splitRecordingsAfterSecs": 0,
+  "splitRecordingsAfterSecs": 1800,
   "splitRecordingsBiggerThanBytes": 0,
-  "splitStrategy": "DONT",
+  "splitStrategy": "TIME",
   "startTab": "Settings",
   "streamatePassword": "",
   "streamateUsername": "",
@@ -132,6 +145,8 @@
   "stripchatUseXhamster": false,
   "stripchatUsername": "",
   "thumbWidth": 180,
+  "timeoutRecordingEndingAt": "00:00",
+  "timeoutRecordingStartingAt": "00:00",
   "totalModelCountInTitle": false,
   "transportLayerSecurity": false,
   "updateThumbnails": true,
@@ -140,11 +155,6 @@
   "webinterface": true,
   "webinterfacePassword": "ctbrec",
   "webinterfaceUsername": "ctbrec",
-  "windowHeight": 800,
-  "windowMaximized": false,
-  "windowWidth": 2147,
-  "windowX": 4,
-  "windowY": 1340,
   "xlovecamPassword": "",
   "xlovecamUsername": ""
 }
