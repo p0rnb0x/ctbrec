@@ -7,6 +7,7 @@ adduser --disabled-password --gecos "" --home /home/ctbrec --ingroup ctbrec --ui
 export HOME=/home/ctbrec
 
 chown -R ctbrec:ctbrec "/cache"
+chown -R ctbrec:ctbrec "/recordings"
 chown -R ctbrec:ctbrec "${HOME}"
 
 exec su-exec ctbrec "${HOME}/server/run.sh"
