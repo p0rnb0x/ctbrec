@@ -24,7 +24,7 @@
   "defaultPriority": 50,
   "determineResolution": false,
   "disabledSites": [],
-  "downloadFilename": "${modelSanitizedName}-${localDateTime}",
+  "downloadFilename": "$sanitize(${modelName})_$format(${localDateTime})",
   "eventHandlers": [],
   "eventsSuspended": false,
   "fastScrollSpeed": true,
@@ -39,8 +39,8 @@
   "httpSecurePort": 1443,
   "httpServer": "localhost",
   "httpTimeout": 10000,
-  "httpUserAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0",
-  "httpUserAgentMobile": "Mozilla/5.0 (Android 9.0; Mobile; rv:82.0) Gecko/82.0 Firefox/82.0",
+  "httpUserAgent": "Mozilla/5.0 (X11; Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0",
+  "httpUserAgentMobile": "Mozilla/5.0 (Android 9.0; Mobile; rv:105.0) Gecko/20100101 Firefox/105.0",
   "ignoredModels": [],
   "lastDownloadDir": "",
   "livePreviews": false,
@@ -66,7 +66,7 @@
   "minimizeToTray": false,
   "minimumLengthInSeconds": 0,
   "minimumResolution": 480,
-  "minimumSpaceLeftInBytes": 34359738368,
+  "minimumSpaceLeftInBytes": 0,
   "modelGroups": [],
   "modelNotes": {},
   "modelPortraits": {},
@@ -83,12 +83,14 @@
   "postProcessors": [
     {
       "type": "ctbrec.recorder.postprocessing.DeleteTooShort",
+      "enabled": true,
       "config": {
         "minimumLengthInSeconds": "120"
       }
     },
     {
       "type": "ctbrec.recorder.postprocessing.Remux",
+      "enabled": true,
       "config": {
         "ffmpeg.args": "-c:v copy -c:a copy -movflags faststart -y -f mp4",
         "file.ext": "mp4"
@@ -96,22 +98,25 @@
     },
     {
       "type": "ctbrec.recorder.postprocessing.Move",
+      "enabled": true,
       "config": {
-        "path.template": "${recordingsDir}/${siteSanitizedName}/${modelSanitizedName}"
+        "path.template": "${recordingsDir}/$sanitize(${siteName})/$sanitize(${modelName})"
       }
     },
     {
       "type": "ctbrec.recorder.postprocessing.Rename",
+      "enabled": true,
       "config": {
-        "filename.template": "${modelSanitizedName}-${localDateTime}.${fileSuffix}"
+        "filename.template": "$sanitize(${modelName})-${localDateTime}.${fileSuffix}"
       }
     },
     {
       "type": "ctbrec.recorder.postprocessing.CreateContactSheet",
+      "enabled": true,
       "config": {
         "padding": "4",
         "burn_in_timestamp": "false",
-        "filename": "/recordings/${siteSanitizedName}/${modelSanitizedName}/${modelSanitizedName}-${localDateTime}_contactsheet.jpg",
+        "filename": "/recordings/$sanitize(${siteName})/$sanitize({modelName})/$sanitize(${modelName})-${localDateTime}_contactsheet.jpg",
         "columns": "4",
         "background": "0x333333",
         "total_size": "1920",
@@ -120,6 +125,7 @@
     },
     {
       "type": "ctbrec.recorder.postprocessing.RemoveKeepFile",
+      "enabled": true,
       "config": {}
     }
   ],
