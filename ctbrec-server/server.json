@@ -116,7 +116,7 @@
       "config": {
         "padding": "4",
         "burn_in_timestamp": "false",
-        "filename": "/recordings/$sanitize(${siteName})/$sanitize({modelName})/$sanitize(${modelName})-${localDateTime}_contactsheet.jpg",
+        "filename": "/recordings/$sanitize(${siteName})/$sanitize(${modelName})/$sanitize(${modelName})-${localDateTime}_contactsheet.jpg",
         "columns": "4",
         "background": "0x333333",
         "total_size": "1920",

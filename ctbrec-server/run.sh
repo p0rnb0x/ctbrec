@@ -11,7 +11,7 @@ fi
 
 cd "${HOME}/server"
 java -Xmx256m \
-     -cp "ctbrec-server-5.0.1-final.jar" \
+     -cp "ctbrec-server-5.0.2-final.jar" \
      -Dctbrec.config=server.json \
      ctbrec.recorder.server.HttpServer
 
