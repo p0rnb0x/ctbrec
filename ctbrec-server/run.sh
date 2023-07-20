@@ -1,8 +1,10 @@
 #!/bin/sh -e
 
-if ! [ -f "${HOME}/.config/ctbrec/server.json" ]; then
-    mkdir -p "${HOME}/.config/ctbrec"
-    cp "${HOME}/server/server.json" "${HOME}/.config/ctbrec/"
+VERSION=5.1.2
+
+if ! [ -f "${HOME}/.config/ctbrec/$VERSION/server.json" ]; then
+    mkdir -p "${HOME}/.config/ctbrec/$VERSION"
+    cp "${HOME}/server/server.json" "${HOME}/.config/ctbrec/$VERSION"
 fi
 
 if ! [ -f "${HOME}/server/ffmpeg/ffmpeg" ]; then
@@ -11,7 +13,7 @@ fi
 
 cd "${HOME}/server"
 java -Xmx256m \
-     -cp "ctbrec-server-5.0.2-final.jar" \
+     -cp "ctbrec-server-$VERSION-final.jar" \
      -Dctbrec.config=server.json \
      ctbrec.recorder.server.HttpServer
 
