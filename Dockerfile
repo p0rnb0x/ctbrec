@@ -1,8 +1,8 @@
-FROM alpine:3.18
+FROM alpine:3.20
 
 RUN apk add --update --no-cache \
         ffmpeg \
-        openjdk17-jre-headless \
+        openjdk21-jre-headless \
         su-exec \
         tzdata
 
