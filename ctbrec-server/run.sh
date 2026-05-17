@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-VERSION=5.4.4
+VERSION=5.4.5
 
 if ! [ -f "${HOME}/.config/ctbrec/$VERSION/server.json" ]; then
     mkdir -p "${HOME}/.config/ctbrec/$VERSION"
@@ -12,7 +12,7 @@ if ! [ -f "${HOME}/server/ffmpeg/ffmpeg" ]; then
 fi
 
 cd "${HOME}/server"
-java -Xmx256m \
+java -Xmx1024m \
      -cp "ctbrec-server-$VERSION-final.jar" \
      -Dctbrec.config=server.json \
      ctbrec.recorder.server.HttpServer
