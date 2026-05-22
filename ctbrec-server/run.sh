@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-VERSION=5.4.5
+VERSION=5.4.6
 
 if ! [ -f "${HOME}/.config/ctbrec/$VERSION/server.json" ]; then
     mkdir -p "${HOME}/.config/ctbrec/$VERSION"
